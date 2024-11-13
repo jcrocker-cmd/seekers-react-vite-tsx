@@ -1,42 +1,15 @@
 import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
 import { AiFillCaretRight } from "react-icons/ai";
-import "../../assets/css/principles.css";
-
-interface VisionMissionData {
-  heading: string;
-  content: string;
-}
-
-const visionMissionData: VisionMissionData[] = [
-  {
-    heading: "Vision",
-    content:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo dolore ipsam veniam aut error rerum suscipit, quam impedit eligendi dolorum. In, quam? Impedit sint placeat recusandae explicabo aliquid dolorem iusto.",
-  },
-  {
-    heading: "Mission",
-    content:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo dolore ipsam veniam aut error rerum suscipit, quam impedit eligendi dolorum. In, quam? Impedit sint placeat recusandae explicabo aliquid dolorem iusto.",
-  },
-  {
-    heading: "Core Values",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, rerum suscipit! Impedit placeat recusandae explicabo aliquid dolorem iusto.",
-  },
-  {
-    heading: "Objectives",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, rerum suscipit! Impedit placeat recusandae explicabo aliquid dolorem iusto.",
-  },
-];
+import "../../assets/css/main.scss";
+import { visionMissionData, VisionMissionData } from "../data/principleData";
 
 const VisionMissionSection: React.FC<VisionMissionData> = ({
   heading,
   content,
 }) => (
   <div className="col-1 justify-center flex items-center py-10 max-md:flex-col">
-    <div className="child-left text-5xl w-[50%] text-center font-medium flex justify-end pr-16 items-center max-md:pr-0 max-md:justify-center">
+    <div className="child-left text-5xl w-[100%] text-center font-medium flex justify-end pr-16 items-center max-md:pr-0 max-md:justify-center">
       <span>
         <h2 className="text-primary max-md:text-2xl">{heading}</h2>
       </span>
@@ -44,7 +17,7 @@ const VisionMissionSection: React.FC<VisionMissionData> = ({
         <AiFillCaretRight />
       </span>
     </div>
-    <div className="child-right text-xl w-[50%] max-md:text-center max-md:w-[100%] max-sm:text-xs">
+    <div className="child-right px-2 py-4 border border-[#ccc] border-r-2 text-xl w-[100%] max-md:text-center max-md:w-[100%] max-sm:text-xs">
       {content}
     </div>
   </div>
@@ -52,12 +25,6 @@ const VisionMissionSection: React.FC<VisionMissionData> = ({
 
 function Principles() {
   useEffect(() => {
-    ScrollReveal().reveal(".heading", {
-      delay: 400,
-      duration: 2000,
-      distance: "50px",
-      origin: "top",
-    });
     ScrollReveal().reveal(".col-1 .child-left", {
       delay: 400,
       duration: 2000,

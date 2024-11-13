@@ -10,7 +10,7 @@ import "../../assets/css/main.css";
 
 function Card() {
   useEffect(() => {
-    ScrollReveal().reveal(".title", {
+    ScrollReveal().reveal(".ca", {
       delay: 400,
       duration: 2000,
       distance: "50px",

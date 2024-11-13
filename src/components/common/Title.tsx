@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ScrollReveal from "scrollreveal";
-import "../../assets/css/main.css";
+import "../../assets/css/main.scss";
 // import BackgroundUrl from "../../images/ministry.jpg";
 
 interface TitlePageProps {
@@ -8,7 +8,7 @@ interface TitlePageProps {
   backgroundImageUrl?: string;
 }
 
-function TitlePage({
+export default function TitlePage({
   titleText,
   backgroundImageUrl = require("../../images/ministry.jpg"),
 }: TitlePageProps) {
@@ -37,5 +37,3 @@ function TitlePage({
     </div>
   );
 }
-
-export default TitlePage;
