@@ -3,8 +3,10 @@ import Homepage from "./components/layout/Homepage";
 import Navbar from "./components/layout/Navbar";
 import Principles from "./components/layout/Principles";
 import Footer from "./components/layout/Footer";
+import Statement from "./components/layout/Statement";
 import Ministries from "./components/pages/Ministries";
 import AboutUs from "./components/pages/AboutUs";
+import BoardMember from "./components/layout/BoardMember";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
@@ -33,6 +35,8 @@ function App() {
                 <Navbar></Navbar>
                 <Homepage></Homepage>
                 <Principles></Principles>
+                <BoardMember></BoardMember>
+                <Statement></Statement>
                 <Footer></Footer>
               </>
             }
