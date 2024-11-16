@@ -21,7 +21,12 @@ $border-color: #d2122e;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: $overlay-color; // Using the variable
+      background: linear-gradient(
+        to right,
+        rgba(236, 72, 153, 0.8), /* Pink with 80% opacity */
+        rgba(139, 92, 246, 0.8), /* Purple with 80% opacity */
+        rgba(59, 130, 246, 0.8)  /* Blue with 80% opacity */
+      );
       z-index: 1;
     }
   }
@@ -89,4 +94,20 @@ $border-color: #d2122e;
   @media screen and (max-width: 768px) {
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); /* Example: Change to full rectangle */
   }
+}
+
+// Ministry
+.ministry-card-wrapper img {
+  transition: transform 4.0s ease;
+}
+
+.ministry-card-wrapper img:hover {
+  transform: scale(1.1); /* Adjust the scale as needed */
+}
+
+.ministry-card-wrapper:hover
+{
+  transform: translateY(-10px);
+  transition: transform 0.4s ease;
+
 }

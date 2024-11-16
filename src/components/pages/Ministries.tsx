@@ -1,5 +1,5 @@
 import Navbar from "../layout/Navbar";
-import Principles from "../layout/Principles";
+import Ministry from "../layout/Ministry";
 import Title from "../common/Title";
 import Footer from "../layout/Footer";
 
@@ -11,7 +11,7 @@ function App() {
         titleText="Ministries"
         backgroundImageUrl={"../../images/ministry.jpg"}
       ></Title>
-      <Principles></Principles>
+      <Ministry></Ministry>
       <Footer></Footer>
     </div>
   );

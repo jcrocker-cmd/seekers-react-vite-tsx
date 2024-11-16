@@ -9,6 +9,7 @@ import AboutUs from "./components/pages/AboutUs";
 import BoardMember from "./components/layout/BoardMember";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import ScrollToTop from "./components/common/ScrollTop";
 
 // Correct way to include Google Fonts in styled-components
 const GlobalStyle = createGlobalStyle`
@@ -26,6 +27,7 @@ function App() {
   return (
     <Router>
       <div>
+        <ScrollToTop />
         <Routes>
           <Route
             path="/"

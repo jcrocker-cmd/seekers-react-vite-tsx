@@ -22,7 +22,7 @@ export default function TitlePage({
   }, []);
   return (
     <div>
-      <div className="title-wrapper w-full bg-neutral-900 min-h-[100%]">
+      <div className="title-wrapper w-full bg-neutral-900 min-h-[100%] pt-[120px]">
         <div
           className="title-section mx-auto max-w-custom w-full flex h-[30vh] justify-center items-center"
           style={{

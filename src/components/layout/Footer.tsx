@@ -4,6 +4,8 @@ import ScrollReveal from "scrollreveal";
 import "../../assets/css/footer.css";
 import Copyright from "./Copyright";
 import Newsletter from "./Newsletter";
+import { FaFacebook } from "react-icons/fa";
+import { SiGooglemaps } from "react-icons/si";
 
 function Footer() {
   useEffect(() => {
@@ -18,44 +20,58 @@ function Footer() {
     <Fragment>
       <Newsletter />
       <div className="footer-wrapper bg-secondary py-0 w-full pt-60">
-        <div className="footer mx-auto mx-o max-w-custom flex justify-center text-center flex-col py-10 px-10">
-          <div className="footer-section navbar-logo footer-logo flex flex-col py-10">
-            <img src={logo} alt="logo" />
-            <div className="navbar-logo-txt text-white">
-              <span>Seekers Baptist Church Inc.</span>
-              <span>Baptist Conference of the Philippines</span>
+        <div className="footer mx-auto max-w-screen-lg flex flex-col text-center text-white font-mont py-10">
+          {/* Logo and Title Section */}
+          <div className="footer-logo flex flex-col items-center py-6 mb-10">
+            <img src={logo} alt="logo" className="w-20 mb-4" />
+            <h3 className="text-lg font-bold">Seekers Baptist Church Inc.</h3>
+            <p className="text-sm">Baptist Conference of the Philippines</p>
+          </div>
+
+          {/* Address and Contact Info Section */}
+          <div className="footer-info flex flex-row justify-between text-left items-center gap-10 text-base">
+            <address className="not-italic">
+              Purok 1, Barangay Salvador
+              <br />
+              Sierra Bullones, Bohol
+              <br />
+              Central Visayas, Philippines, 6320
+            </address>
+            <div className="footer-contact">
+              <p>Mobile: +63 968 362 7219</p>
+              <p>Tel: 032 345 8783</p>
+              <p>
+                Email:{" "}
+                <a href="mailto:hrcebu@cody.inc" className="text-blue-400">
+                  hrcebu@cody.inc
+                </a>
+              </p>
             </div>
           </div>
 
-          <hr className="mb-10 bg-[#ccc] w-[50%] flex justify-center mx-auto" />
-
-          <div className="footer-section text-white w-[100%] flex flex-row flex-wrap justify-center">
-            <div className="footer-col w-[20%] text-center flex flex-col gap-4 justify-center max-md:w-[50%] max-sm:text-xs">
-              <h3>Quick Links</h3>
-              <ul className="flex flex-col gap-4">
-                <li>Home</li>
-                <li>Shop</li>
-                <li>Blog</li>
-                <li>Product</li>
-                <li>Brand</li>
-                <li>Contact</li>
-              </ul>
+          {/* Links and Social Icons Section */}
+          <div className="footer-links flex flex-col sm:flex-row justify-between items-center pt-10">
+            <div className="links flex flex-wrap gap-4 text-base tex">
+              <a href="#">Services</a>
+              <a href="#">Careers</a>
+              <a href="#">About Us</a>
+              <a href="#">Insights</a>
+              <a href="#">Contact</a>
             </div>
-            <div className="footer-col w-[20%] text-center flex flex-col gap-4 max-md:w-[50%] max-sm:text-xs">
-              <h3>Quick Links</h3>
-              <ul className="flex flex-col gap-4">
-                <li>Home</li>
-                <li>Shop</li>
-                <li>Blog</li>
-                <li>Product</li>
-                <li>Brand</li>
-                <li>Contact</li>
-              </ul>
+            <div className="social-icons flex items-center gap-6 pt-6 md:pt-0">
+              <a href="#" className="text-2xl">
+                <SiGooglemaps />
+              </a>
+              <a href="#" className="text-2xl">
+                <FaFacebook />
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <Copyright></Copyright>
+
+      {/* Copyright Component */}
+      <Copyright />
     </Fragment>
   );
 }
