@@ -1,11 +1,6 @@
 import { AiFillCaretRight } from "react-icons/ai";
 import { StatementDataProps } from "../data/stamentOfFaithData";
 
-// interface StatementOfFaithCardProps {
-//   heading: string;
-//   content: string; // Optional color for text
-// }
-
 const StatementOfFaithCard = ({ heading, content }: StatementDataProps) => {
   return (
     <div className="col-1 justify-center flex items-center py-10 max-md:flex-col">
