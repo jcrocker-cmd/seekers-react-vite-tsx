@@ -126,6 +126,7 @@
 
 .dropdown {
   position: relative;
+  display: inline-block;
 }
 
 .dropdown-toggle {
@@ -165,9 +166,7 @@
 }
 
 .dropdown:hover .dropdown-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
+  display: block;
 }
 
 .dropdown-menu li {

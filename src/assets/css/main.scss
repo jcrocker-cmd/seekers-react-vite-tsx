@@ -105,9 +105,11 @@ $border-color: #d2122e;
   transform: scale(1.1); /* Adjust the scale as needed */
 }
 
+.ministry-card-wrapper{
+  transition: transform 0.4s ease;
+
+}
 .ministry-card-wrapper:hover
 {
   transform: translateY(-10px);
-  transition: transform 0.4s ease;
-
 }

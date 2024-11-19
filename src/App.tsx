@@ -5,11 +5,16 @@ import Principles from "./components/layout/Principles";
 import Footer from "./components/layout/Footer";
 import Statement from "./components/layout/Statement";
 import Ministries from "./components/pages/Ministries";
+import Affiliation from "./components/layout/Affiliations";
 import AboutUs from "./components/pages/AboutUs";
+import ContactUs from "./components/pages/ContactUs";
+import ContactUsLayout from "./components/layout/ContactUs";
+import NotFoundPage from "./components/pages/NotFoundPage";
 import BoardMember from "./components/layout/BoardMember";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import ScrollToTop from "./components/common/ScrollTop";
+import InternalServerErrorPage from "./components/pages/InternalServerErrorPage";
 
 // Correct way to include Google Fonts in styled-components
 const GlobalStyle = createGlobalStyle`
@@ -39,6 +44,8 @@ function App() {
                 <Principles></Principles>
                 <BoardMember></BoardMember>
                 <Statement></Statement>
+                <Affiliation></Affiliation>
+                <ContactUsLayout></ContactUsLayout>
                 <Footer></Footer>
               </>
             }
@@ -60,6 +67,17 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/contact-us"
+            element={
+              <>
+                <ContactUs></ContactUs>
+              </>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/500" element={<InternalServerErrorPage />} />
         </Routes>
       </div>
     </Router>

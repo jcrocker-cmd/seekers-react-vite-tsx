@@ -6,6 +6,7 @@ import Copyright from "./Copyright";
 import Newsletter from "./Newsletter";
 import { FaFacebook } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
+import Section from "../common/Section";
 
 function Footer() {
   useEffect(() => {
@@ -19,7 +20,7 @@ function Footer() {
   return (
     <Fragment>
       <Newsletter />
-      <div className="footer-wrapper bg-secondary py-0 w-full pt-60">
+      <Section className="footer-wrapper bg-secondary py-0 w-full pt-60">
         <div className="footer mx-auto max-w-screen-lg flex flex-col text-center text-white font-mont py-10">
           {/* Logo and Title Section */}
           <div className="footer-logo flex flex-col items-center py-6 mb-10">
@@ -68,7 +69,7 @@ function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
       {/* Copyright Component */}
       <Copyright />
