@@ -2,8 +2,10 @@ import "../../assets/css/navbar.css";
 import logo from "../../images/logo.png";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import NavbarDropDown from "../common/NavbarDropDown";
 import Section from "../common/Section";
+import NavbarMobile from "../common/NavbarMobile";
+import { aboutUsItems, servicesItems } from "../data/navbarDropdownData";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,31 +46,18 @@ function Navbar() {
           </div>
         </Link>
         <ul className="navbar-links">
-          <li
-            className={`dropdown ${
-              location.pathname === "/about-us" ? "active" : ""
-            }`}
-          >
-            <Link to="/about-us">
-              <span className="dropdown-toggle">
-                ABOUT US
-                <span className="arrow">
-                  <MdKeyboardArrowDown />
-                </span>
-              </span>
-            </Link>
-            <ul className="dropdown-menu">
-              <li>
-                <Link to="/history">History</Link>
-              </li>
-              <li>
-                <Link to="/mission">Principles</Link>
-              </li>
-              <li>
-                <Link to="/team">Team</Link>
-              </li>
-            </ul>
-          </li>
+          <NavbarDropDown
+            title="About Us"
+            dropitems={aboutUsItems}
+            activePath="/about-us"
+          />
+
+          <NavbarDropDown
+            title="Services"
+            dropitems={servicesItems}
+            activePath="/services"
+          />
+
           <li className={location.pathname === "/ministries" ? "active" : ""}>
             <Link to="/ministries">MINISTRIES</Link>
           </li>
@@ -82,6 +71,9 @@ function Navbar() {
         <button className="navbar-toggle" onClick={toggleMenu}>
           ☰
         </button>
+
+        {/* Fullscreen mobile menu */}
+        {isOpen && <NavbarMobile toggleMenu={toggleMenu} />}
       </nav>
     </Section>
   );

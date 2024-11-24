@@ -10,6 +10,7 @@ import AboutUs from "./components/pages/AboutUs";
 import ContactUs from "./components/pages/ContactUs";
 import ContactUsLayout from "./components/layout/ContactUs";
 import NotFoundPage from "./components/pages/NotFoundPage";
+import ServicesPage from "./components/pages/ServicesPage";
 import BoardMember from "./components/layout/BoardMember";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
@@ -73,6 +74,14 @@ function App() {
             element={
               <>
                 <ContactUs></ContactUs>
+              </>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <>
+                <ServicesPage></ServicesPage>
               </>
             }
           />

@@ -6,7 +6,7 @@ const verse =
 
 function Homepage() {
   return (
-    <Section className="homepage-wrapper w-full mt-[100px]">
+    <Section className="homepage-wrapper w-full mt-[100px] max-nav:mt-[85px]">
       <div className="homepage-section mx-0">
         <div className="homepage-content max-w-custom pt-[100px]">
           <h1

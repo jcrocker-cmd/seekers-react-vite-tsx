@@ -20,7 +20,7 @@ function Footer() {
   return (
     <Fragment>
       <Newsletter />
-      <Section className="footer-wrapper bg-secondary py-0 w-full pt-60">
+      <Section className="footer-wrapper bg-secondary py-0 w-full pt-60 px-3">
         <div className="footer mx-auto max-w-screen-lg flex flex-col text-center text-white font-mont py-10">
           {/* Logo and Title Section */}
           <div className="footer-logo flex flex-col items-center py-6 mb-10">
@@ -30,7 +30,7 @@ function Footer() {
           </div>
 
           {/* Address and Contact Info Section */}
-          <div className="footer-info flex flex-row justify-between text-left items-center gap-10 text-base">
+          <div className="footer-info flex flex-row justify-between text-left items-center gap-10 text-base max-sm:flex-col max-sm:text-center">
             <address className="not-italic">
               Purok 1, Barangay Salvador
               <br />
@@ -54,10 +54,8 @@ function Footer() {
           <div className="footer-links flex flex-col sm:flex-row justify-between items-center pt-10">
             <div className="links flex flex-wrap gap-4 text-base tex">
               <a href="#">Services</a>
-              <a href="#">Careers</a>
               <a href="#">About Us</a>
-              <a href="#">Insights</a>
-              <a href="#">Contact</a>
+              <a href="#">Contact Us</a>
             </div>
             <div className="social-icons flex items-center gap-6 pt-6 md:pt-0">
               <a href="#" className="text-2xl">

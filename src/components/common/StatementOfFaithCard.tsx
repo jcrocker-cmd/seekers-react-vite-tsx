@@ -14,7 +14,7 @@ const StatementOfFaithCard = ({ heading, content }: StatementDataProps) => {
           <AiFillCaretRight />
         </span>
       </div>
-      <div className="child-right px-2 py-4 border border-[#ccc] border-r-2 text-xl w-[100%] max-md:text-center max-md:w-[100%] max-sm:text-xs">
+      <div className="child-right px-2 py-4 border border-[#ccc] border-r-2 text-xl w-[100%] max-md:text-center max-md:w-[100%] max-sm:text-sm">
         {content}
       </div>
     </div>

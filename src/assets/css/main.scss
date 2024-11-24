@@ -98,11 +98,11 @@ $border-color: #d2122e;
 
 // Ministry
 .ministry-card-wrapper img {
-  transition: transform 4.0s ease;
+  transition: transform 5.0s ease;
 }
 
-.ministry-card-wrapper img:hover {
-  transform: scale(1.1); /* Adjust the scale as needed */
+.ministry-card-wrapper:hover img {
+  transform: scale(1.2); 
 }
 
 .ministry-card-wrapper{
@@ -112,4 +112,11 @@ $border-color: #d2122e;
 .ministry-card-wrapper:hover
 {
   transform: translateY(-10px);
+}
+
+// Contact Us
+.contactus-content form label,
+.contactus-content form button,
+.contactus-content form input{
+  font-size: 14px;
 }
