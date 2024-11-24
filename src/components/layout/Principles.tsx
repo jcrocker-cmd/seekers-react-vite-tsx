@@ -8,7 +8,7 @@ const VisionMissionSection: React.FC<VisionMissionData> = ({
   heading,
   content,
 }) => (
-  <div className="col-1 justify-center flex items-center py-10 max-md:flex-col">
+  <div className="col-1 justify-center flex items-center py-10 max-md:flex-col max-sm:py-5">
     <div className="child-left text-5xl w-[100%] text-center font-medium flex justify-end pr-16 items-center max-md:pr-0 max-md:justify-center">
       <span>
         <h2 className="text-primary max-md:text-2xl">{heading}</h2>

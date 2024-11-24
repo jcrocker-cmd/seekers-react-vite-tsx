@@ -1,10 +1,12 @@
 import "../../assets/css/homepage.css";
+import Section from "../common/Section";
+
 const verse =
   '"For the Son of Man came to seek and to save the lost." -Luke 19:10';
 
 function Homepage() {
   return (
-    <div className="homepage-wrapper w-full mt-[100px]">
+    <Section className="homepage-wrapper w-full mt-[100px]">
       <div className="homepage-section mx-0">
         <div className="homepage-content max-w-custom pt-[100px]">
           <h1
@@ -38,7 +40,7 @@ function Homepage() {
           </div>
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 

@@ -3,8 +3,8 @@ import { StatementDataProps } from "../data/stamentOfFaithData";
 
 const StatementOfFaithCard = ({ heading, content }: StatementDataProps) => {
   return (
-    <div className="col-1 justify-center flex items-center py-10 max-md:flex-col">
-      <div className="child-left w-[100%] text-center font-medium flex justify-end pr-16 items-center max-md:pr-0 max-md:justify-center">
+    <div className="col-1 justify-center flex items-center py-10 max-md:flex-col max-sm:py-5">
+      <div className="child-left w-[100%] text-center font-medium flex justify-end pr-16 items-center max-md:pr-0 max-md:justify-center max-sm:">
         <span>
           <h2 className="text-primary text-right text-5xl max-md:text-2xl max-md:text-center">
             {heading}

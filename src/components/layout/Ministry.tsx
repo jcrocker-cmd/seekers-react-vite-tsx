@@ -1,11 +1,13 @@
 import MinistryCard from "../common/MinistryCard";
 import "../../assets/css/main.scss";
+import Section from "../common/Section";
+import { ministriesData } from "../data/ministriesData";
 
 function Minsitry() {
   return (
-    <div className="ministry-wrapper w-full">
+    <Section className="ministry-wrapper w-full">
       <div className="ministry mx-auto max-w-custom flex flex-col items-center justify-center text-center py-20 font-mont">
-        <p className="max-w-[800px] font-semibold">
+        <p className="max-w-[800px] font-base">
           At Seekers Baptist Church, our ministries are designed to reflect
           Christ's love and serve our community with faith and purpose. Each
           ministry is focused on nurturing spiritual growth, fostering
@@ -13,23 +15,15 @@ function Minsitry() {
         </p>
         <div className="flex flex-wrap gap-5">
           <MinistryCard
-            titleText="Sunday School"
-            description="Our music ministry focuses on leading the congregation in worship and
-          glorifying God through song."
+            titleText={ministriesData[0].titleText}
+            description={ministriesData[0].description}
+            imageUrl={ministriesData[0].imageUrl}
           />
-          <MinistryCard
-            titleText="Compassion"
-            description="Our music ministry focuses on leading the congregation in worship and
-          glorifying God through song."
-          />
-          <MinistryCard
-            titleText="Bible Study"
-            description="Our music ministry focuses on leading the congregation in worship and
-          glorifying God through song."
-          />
+          <MinistryCard {...ministriesData[1]} />
+          <MinistryCard {...ministriesData[2]} />
         </div>
       </div>
-    </div>
+    </Section>
   );
 }
 

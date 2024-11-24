@@ -3,6 +3,7 @@ import logo from "../../images/logo.png";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Section from "../common/Section";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ function Navbar() {
     };
   }, []);
   return (
-    <div className={`navbar-wrapper ${isSticky ? "sticky" : ""}`}>
+    <Section className={`navbar-wrapper ${isSticky ? "sticky" : ""}`}>
       <nav className="navbar">
         <Link to="/">
           <div className="navbar-logo">
@@ -44,7 +45,7 @@ function Navbar() {
         </Link>
         <ul className="navbar-links">
           <li
-            className={`dropdown relative ${
+            className={`dropdown ${
               location.pathname === "/about-us" ? "active" : ""
             }`}
           >
@@ -74,15 +75,15 @@ function Navbar() {
           <li>
             <a href="#services">GALLERY</a>
           </li>
-          <li>
-            <a href="#contact">CONTACT US</a>
+          <li className={location.pathname === "/contact-us" ? "active" : ""}>
+            <Link to="/contact-us">CONTACT US</Link>
           </li>
         </ul>
         <button className="navbar-toggle" onClick={toggleMenu}>
           ☰
         </button>
       </nav>
-    </div>
+    </Section>
   );
 }
 
