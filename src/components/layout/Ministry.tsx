@@ -22,6 +22,16 @@ function Minsitry() {
           <MinistryCard {...ministriesData[1]} />
           <MinistryCard {...ministriesData[2]} />
         </div>
+
+        <div className="flex flex-wrap gap-5">
+          <MinistryCard
+            titleText={ministriesData[3].titleText}
+            description={ministriesData[3].description}
+            imageUrl={ministriesData[3].imageUrl}
+          />
+          <MinistryCard {...ministriesData[4]} />
+          <MinistryCard {...ministriesData[5]} />
+        </div>
       </div>
     </Section>
   );

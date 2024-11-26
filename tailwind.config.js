@@ -25,6 +25,7 @@ export default {
         "max-md": { max: "768px" }, // Styles apply to screens <= 768px
         "max-sm": { max: "640px" }, // Styles apply to screens <= 640px
         "max-lg": { max: "1024px" }, // Styles apply to screens <= 640px
+        "max-nav": { max: "1060px" },
       },
     },
   },

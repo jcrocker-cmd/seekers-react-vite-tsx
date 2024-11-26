@@ -64,14 +64,16 @@ function ContactUS() {
     <Section className="contactus-wrapper relative w-full pt-20">
       <div className="contactus-content py-10 mx-auto max-w-custom max-md:px-4">
         <div className="text-center pb-20">
-          <h1 className="text-4xl font-semibold">Connect with us!</h1>
-          <p>
+          <h1 className="text-4xl font-semibold max-sm:text-2xl">
+            Connect with us!
+          </h1>
+          <p className="max-sm:text-sm">
             Send us a message if you have questions, comments,
-            <br /> or inquiries related to BCP Bohol District.
+            <br /> or inquiries related to Seekers.
           </p>
         </div>
 
-        <main className="relative min-h-screen flex flex-col md:flex-row justify-center items-center">
+        <main className="relative min-h-screen flex flex-col md:flex-row justify-center items-center max-sm:min-h-[70vh]">
           {/* Form Section */}
           <div className="bg-[#ECEFF3] child-left rounded-lg shadow-lg p-8 w-1/2 absolute top-0 left-10 z-10 max-md:left-0 max-md:w-full">
             <form onSubmit={handleSubmit}>

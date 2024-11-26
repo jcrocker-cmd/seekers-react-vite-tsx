@@ -22,14 +22,14 @@ export default function TitlePage({
   }, []);
   return (
     <div>
-      <div className="title-wrapper w-full bg-neutral-900 min-h-[100%] pt-[120px]">
+      <div className="title-wrapper w-full bg-neutral-900 min-h-[100%] pt-[120px] max-sm:pt-[100px]">
         <div
-          className="title-section mx-auto max-w-custom w-full flex h-[30vh] justify-center items-center"
+          className="title-section mx-auto max-w-custom w-full flex h-[30vh] justify-center items-center max-sm:h-[15vh]"
           style={{
             backgroundImage: `url(${backgroundImageUrl})`,
           }}
         >
-          <h1 className="title text-8xl text-white font-mont font-semibold z-10 title-glow">
+          <h1 className="title text-8xl text-white font-mont font-semibold z-10 title-glow max-sm:text-4xl">
             {titleText}
           </h1>
         </div>

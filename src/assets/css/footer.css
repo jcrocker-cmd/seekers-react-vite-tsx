@@ -32,3 +32,12 @@
   -webkit-box-shadow: 1px -4px 43px -9px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 1px -4px 43px -9px rgba(0, 0, 0, 0.5);
 }
+
+@media (max-width: 768px) {
+  .floating-card {
+    top: -50px;
+  }
+  .footer-wrapper {
+    clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+}
