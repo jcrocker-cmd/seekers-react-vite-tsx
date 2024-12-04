@@ -6,15 +6,16 @@ import NavbarDropDown from "../common/NavbarDropDown";
 import Section from "../common/Section";
 import NavbarMobile from "../common/NavbarMobile";
 import { aboutUsItems, servicesItems } from "../data/navbarDropdownData";
+// State
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../state/store";
+import { toggleMenu, closeMenu } from "../state/navbar/navbarSlice";
 
 function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const isOpen = useSelector((state: RootState) => state.navbar.isOpen);
   const [isSticky, setIsSticky] = useState(false);
   const location = useLocation();
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
   // Handle scroll event
   useEffect(() => {
@@ -61,19 +62,22 @@ function Navbar() {
           <li className={location.pathname === "/ministries" ? "active" : ""}>
             <Link to="/ministries">MINISTRIES</Link>
           </li>
-          <li>
-            <a href="#services">GALLERY</a>
+          <li className={location.pathname === "/gallery" ? "active" : ""}>
+            <a href="/gallery">GALLERY</a>
           </li>
           <li className={location.pathname === "/contact-us" ? "active" : ""}>
             <Link to="/contact-us">CONTACT US</Link>
           </li>
         </ul>
-        <button className="navbar-toggle" onClick={toggleMenu}>
+        <button
+          className="navbar-toggle"
+          onClick={() => dispatch(toggleMenu())}
+        >
           ☰
         </button>
 
         {/* Fullscreen mobile menu */}
-        {isOpen && <NavbarMobile toggleMenu={toggleMenu} />}
+        {isOpen && <NavbarMobile toggleMenu={() => dispatch(closeMenu())} />}
       </nav>
     </Section>
   );

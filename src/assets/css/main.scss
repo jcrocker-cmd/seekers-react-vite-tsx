@@ -120,3 +120,52 @@ $border-color: #d2122e;
 .contactus-content form input{
   font-size: 14px;
 }
+
+
+// Scroll Up
+.scrollup {
+    
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-decoration: none;
+  height: 60px;
+  width: 60px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  border-radius: 20px;
+  right: 20px;
+  bottom: -60px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+  transition: .6s;
+  z-index: 2;
+}
+
+.scrollup-icon
+{
+  text-decoration: none;
+  color: white;
+}
+
+.scrollup:hover {
+  transition: 0.5s;
+  
+}
+
+
+/* Show scroll */
+.show-scroll {
+  bottom: 20px;
+}
+
+@media (max-width:500px) {
+
+  .scrollup {
+  
+    height: 30px;
+    width: 30px;
+    font-size: 11px;
+  }
+
+}

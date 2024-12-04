@@ -31,7 +31,7 @@ const NavbarMobile = ({ toggleMenu }: NavbarMobileMenuProps) => {
             </Link>
           </li>
           <li>
-            <a href="#services" onClick={toggleMenu}>
+            <a href="/gallery" onClick={toggleMenu}>
               Gallery
             </a>
           </li>

@@ -1,0 +1,40 @@
+/* Light Gallery */
+/* Container for the gallery */
+.gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Aligns items to the left */
+  padding: 20px;
+  gap: 5px;
+}
+
+/* Images in the gallery */
+.gallery-image {
+  width: 250px; /* Fixed width for uniform sizing */
+  height: 170px; /* Fixed height for uniform sizing */
+  object-fit: cover; /* Ensures the image scales and crops properly */
+  /* border: 2px solid #9e1b32; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover effect for images */
+.gallery-image:hover {
+  transform: scale(1.05);
+}
+
+/* Make the gallery responsive */
+@media (max-width: 768px) {
+  .gallery-container {
+    gap: 5px;
+  }
+  .gallery-image {
+    max-width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-image {
+    max-width: calc(100% - 10px);
+  }
+}

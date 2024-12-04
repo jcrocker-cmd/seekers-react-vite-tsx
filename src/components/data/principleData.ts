@@ -8,13 +8,12 @@ export interface VisionMissionData {
 export const visionMissionData: VisionMissionData[] = [
   {
     heading: "Vision",
-    content:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo dolore ipsam veniam aut error rerum suscipit, quam impedit eligendi dolorum. In, quam? Impedit sint placeat recusandae explicabo aliquid dolorem iusto.",
+    content: "Establish God-Fearing families",
   },
   {
     heading: "Mission",
     content:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo dolore ipsam veniam aut error rerum suscipit, quam impedit eligendi dolorum. In, quam? Impedit sint placeat recusandae explicabo aliquid dolorem iusto.",
+      "Seekers Baptist Church is a cluster of believers that evangelize and disciple families through holistic ministry so that lives can be transformed by experiencing the fullness of life for God's glory",
   },
   {
     heading: "Core Values",
