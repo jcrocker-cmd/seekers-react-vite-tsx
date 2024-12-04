@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  animation: zoomAnimation 20s ease-in-out infinite; /* Add animation */
 }
 
 .homepage-section::before {
@@ -26,6 +27,18 @@
   position: relative;
   z-index: 2;
   color: white;
+}
+
+@keyframes zoomAnimation {
+  0% {
+    background-size: 100%; /* Start at normal size */
+  }
+  50% {
+    background-size: 110%; /* Zoom in at the middle */
+  }
+  100% {
+    background-size: 100%; /* Zoom out back to original size */
+  }
 }
 
 .text-glow {

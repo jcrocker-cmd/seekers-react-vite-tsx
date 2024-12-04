@@ -16,7 +16,7 @@ const MinistryCard = ({
         />
       </div>
       {/* Description Section */}
-      <div className="description bg-[#6960e3] text-white px-4 py-6 text-center h-[100%] ">
+      <div className="description bg-[#6960e3] text-white px-4 py-6 text-center h-full flex flex-col justify-start items-center">
         <h1 className="text-xl font-bold">{titleText}</h1>
         <p className="text-sm mt-2">{description}</p>
       </div>

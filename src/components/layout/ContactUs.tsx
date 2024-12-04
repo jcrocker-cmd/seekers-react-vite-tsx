@@ -14,11 +14,11 @@ function ContactUS() {
     };
     ScrollReveal().reveal("main .child-left", {
       ...scrollRevealConfig,
-      origin: "left",
+      origin: "top",
     });
     ScrollReveal().reveal("main .child-right", {
       ...scrollRevealConfig,
-      origin: "right",
+      origin: "bottom",
     });
   }, []);
 
