@@ -1,39 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom"; // Add useNavigate for navigation
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setFormData, resetFormData } from "../state/form/formSlice";
+import { setFormData } from "../state/form/formSlice";
 import { setLoading } from "../state/loading/loadingSlice";
 import { RootState } from "../state/store";
-
-interface Customer {
-  id: number;
-  name: string;
-  email: string;
-  message: string;
-  phone: string;
-}
 
 function Edit() {
   const { id } = useParams<{ id: string }>(); // Get customer ID from the URL
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Add useNavigate to redirect after submission
+  const navigate = useNavigate();
 
-  // Access form data from the Redux store
   const formData = useSelector((state: RootState) => state.form);
-
-  const [customer, setCustomer] = useState<Customer | null>(null);
   const loading = useSelector((state: RootState) => state.loading.loading);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch(setLoading(true)); // Set loading to true before fetching data
-        const response = await axios.get<{ customer: Customer }>(
+        dispatch(setLoading(true));
+        const response = await axios.get(
           `http://localhost:8000/api/customers/${id}/edit`
         );
-        setCustomer(response.data.customer);
-        // Dispatch the customer data to the Redux store
         dispatch(
           setFormData({
             name: response.data.customer.name,
@@ -45,33 +32,28 @@ function Edit() {
       } catch (error) {
         console.error("Error fetching customer details:", error);
       } finally {
-        dispatch(setLoading(false)); // Set loading to false whether the request succeeds or fails
+        dispatch(setLoading(false));
       }
     };
 
-    fetchData(); // Call the async function
-  }, [id, dispatch]); // Re-run effect whenever `id` changes
+    fetchData();
+  }, [id, dispatch]);
 
-  // Input Change with State
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    // Update the Redux state when input changes
     dispatch(setFormData({ ...formData, [e.target.id]: e.target.value }));
   };
 
-  // Update Data
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const response = await axios.put(
         `http://localhost:8000/api/customers/${id}/update`,
         formData
-      ); // Use PUT for updating data
-
-      console.log("Customer updated:", response.data.message);
+      );
       alert("Customer updated successfully!");
+      console.log(response.data);
       navigate("/index");
     } catch (error) {
       console.error("Error updating customer:", error);
