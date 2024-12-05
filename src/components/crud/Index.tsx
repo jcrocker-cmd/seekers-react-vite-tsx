@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../state/loading/loadingSlice";
 import { RootState } from "../state/store";
+import Swal from "sweetalert2";
 
 // Define the type for customer data
 interface Customer {
@@ -40,25 +41,40 @@ function View() {
 
   // Delete a customer
   const handleDelete = async (id: number) => {
-    try {
-      // Make DELETE request to the API
-      const response = await axios.delete(
-        `http://localhost:8000/api/customers/${id}/delete`
-      );
+    // Show the SweetAlert2 confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    });
 
-      // Fetch the updated list of customers after deletion
-      const updatedList = await axios.get<{ customer: Customer[] }>(
-        "http://localhost:8000/api/customers"
-      );
+    // If user confirms, proceed with delete
+    if (result.isConfirmed) {
+      try {
+        // Make DELETE request to your API
+        const response = await axios.delete(
+          `http://localhost:8000/api/customers/${id}/delete`
+        );
 
-      // Use the message returned by the API for the alert
-      alert(response.data.message); // Show the API's response message (e.g., 'Customer deleted successfully')
+        // Show success alert
+        Swal.fire("Deleted!", response.data.message, "success");
+        console.log(response.data);
 
-      // Update the state with the new list of customers
-      setCustomers(updatedList.data.customer);
-    } catch (error) {
-      console.error("Error deleting customer:", error);
-      alert("Failed to delete customer."); // Generic error message
+        // Optionally: Fetch the updated list of customers
+        const updatedList = await axios.get(
+          "http://localhost:8000/api/customers"
+        );
+        setCustomers(updatedList.data.customer);
+      } catch (error) {
+        console.error("Error deleting customer:", error);
+        Swal.fire("Error!", "Failed to delete customer.", "error");
+      }
+    } else {
+      // User canceled the action
+      console.log("User canceled the deletion.");
     }
   };
 
@@ -132,6 +148,13 @@ function View() {
                   >
                     Delete
                   </button>
+
+                  {/* <button
+                    onClick={() => deleteALert()}
+                    className="px-4 py-2 bg-red-500 text-white rounded-md"
+                  >
+                    Swal
+                  </button> */}
                 </td>
               </tr>
             ))}
