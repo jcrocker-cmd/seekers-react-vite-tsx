@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import "../../assets/css/main.scss";
 
