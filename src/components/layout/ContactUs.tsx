@@ -3,7 +3,8 @@ import Section from "../common/Section";
 import image from "../../images/shepherd-jesus-christ-leading-the-sheep-vector-50871401.jpg";
 import { useEffect, useState } from "react";
 import ScrollReveal from "scrollreveal";
-import axios from "axios";
+import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
 
 function ContactUS() {
   useEffect(() => {
@@ -28,36 +29,77 @@ function ContactUS() {
     content: "",
   });
 
-  const [responseMessage, setResponseMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    content: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const validateForm = () => {
+    const newErrors = {
+      name: formData.name ? "" : "Name is required.",
+      email: formData.email
+        ? /^\S+@\S+\.\S+$/.test(formData.email)
+          ? ""
+          : "Please enter a valid email."
+        : "Email is required.",
+      content: formData.content ? "" : "Message is required.",
+    };
+    setErrors(newErrors);
+    return !Object.values(newErrors).some((error) => error !== "");
+  };
+
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/create",
-        formData,
+    if (!validateForm()) {
+      Swal.fire("Error!", "Please fill in all fields correctly.", "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    emailjs
+      .send(
+        "service_cjhj8z4",
+        "template_m1snr8a",
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.content,
+        },
+        "vLaqhQ8ZPgX8Yhe_4"
+      )
+
+      .then(
+        (result) => {
+          setFormData({ name: "", email: "", content: "" }); // Reset form
+          console.log(result);
+          Swal.fire("Success!", "Email Sent Successfully", "success");
+          setIsSubmitting(false); // Re-enable button after successful submission
+        },
+        (error) => {
+          console.error("FAILED...", error.text);
+          Swal.fire(
+            "Error!",
+            "Failed to send email. Please try again.",
+            "error"
+          );
+
+          setIsSubmitting(false); // Re-enable button if submission fails
         }
       );
-
-      setResponseMessage(response.data.message || "Request sent successfully!");
-      setFormData({ name: "", email: "", content: "" }); // Reset form
-    } catch (error) {
-      console.error("Error sending email:", error);
-      setErrorMessage("Failed to send the email. Please try again.");
-    }
   };
 
   return (
@@ -76,7 +118,7 @@ function ContactUS() {
         <main className="relative min-h-screen flex flex-col md:flex-row justify-center items-center max-sm:min-h-[70vh]">
           {/* Form Section */}
           <div className="bg-[#ECEFF3] child-left rounded-lg shadow-lg p-8 w-1/2 absolute top-0 left-10 z-10 max-md:left-0 max-md:w-full">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={sendEmail}>
               <div className="mb-6">
                 <label
                   htmlFor="name"
@@ -91,8 +133,13 @@ function ContactUS() {
                   type="text"
                   id="name"
                   placeholder="Your name"
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-blue-200 focus:outline-none"
+                  className={`w-full border ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name}</p>
+                )}
               </div>
               <div className="mb-6">
                 <label
@@ -108,8 +155,13 @@ function ContactUS() {
                   type="email"
                   id="email"
                   placeholder="Your email address"
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-blue-200 focus:outline-none"
+                  className={`w-full border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email}</p>
+                )}
               </div>
               <div className="mb-6">
                 <label
@@ -125,22 +177,23 @@ function ContactUS() {
                   id="content"
                   // rows="4"
                   placeholder="Enter your message"
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none"
+                  className={`w-full border ${
+                    errors.content ? "border-red-500" : "border-gray-300"
+                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
                 ></textarea>
+                {errors.content && (
+                  <p className="text-red-500 text-sm">{errors.content}</p>
+                )}
               </div>
               <button
                 type="submit"
                 className="bg-black text-white py-3 px-6 rounded-lg shadow hover:bg-gray-800 focus:ring focus:ring-black focus:outline-none"
+                disabled={isSubmitting} // Disable button when submitting
               >
-                Submit
+                {isSubmitting ? "Submitting..." : "Submit"}{" "}
+                {/* Show loading text */}
               </button>
             </form>
-            {responseMessage && (
-              <p className="text-green-600 mt-4">{responseMessage}</p>
-            )}
-            {errorMessage && (
-              <p className="text-red-600 mt-4">{errorMessage}</p>
-            )}
           </div>
 
           {/* Image Section */}
