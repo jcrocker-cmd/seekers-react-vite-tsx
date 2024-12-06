@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "../state/form/formSlice";
 import { setLoading } from "../state/loading/loadingSlice";
 import { RootState } from "../state/store";
+import Swal from "sweetalert2";
 
 function Edit() {
   const { id } = useParams<{ id: string }>(); // Get customer ID from the URL
@@ -31,6 +32,7 @@ function Edit() {
         );
       } catch (error) {
         console.error("Error fetching customer details:", error);
+        Swal.fire("Error!", "Failed to fetch customer details.", "error");
       } finally {
         dispatch(setLoading(false));
       }
@@ -52,8 +54,9 @@ function Edit() {
         `http://localhost:8000/api/customers/${id}/update`,
         formData
       );
-      alert("Customer updated successfully!");
+      // alert("Customer updated successfully!");
       console.log(response.data);
+      Swal.fire("Updated!", response.data.mes, "success");
       navigate("/index");
     } catch (error) {
       console.error("Error updating customer:", error);
