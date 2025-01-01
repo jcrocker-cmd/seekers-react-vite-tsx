@@ -44,3 +44,9 @@
 .text-glow {
   text-shadow: 0 0 15px rgba(210, 18, 46, 0.8), 0 0 30px rgba(255, 99, 71, 0.6);
 }
+
+@media (max-width: 768px) {
+  .homepage-section {
+    animation: none;
+  }
+}

@@ -12,23 +12,23 @@ import outreach from "../../images/outreach.jpg";
 
 // Interface for statement data
 export interface MinistriesDataProps {
-  titleText: string;
-  description: string;
-  imageUrl: string;
+  titleText?: string;
+  description?: string;
+  imageUrl?: string;
 }
 
 export const ministriesData: MinistriesDataProps[] = [
-  {
-    titleText: "Church Outreach",
-    description:
-      "Our Church Outreach ministry focuses on reaching out to the community, sharing the love of Christ, and providing support to those in need through various service activities.",
-    imageUrl: outreach,
-  },
   {
     titleText: "Music Ministry",
     description:
       "Our music ministry focuses on leading the congregation in worship and glorifying God through song.",
     imageUrl: music,
+  },
+  {
+    titleText: "Church Outreach",
+    description:
+      "Our Church Outreach ministry focuses on reaching out to the community, sharing the love of Christ, and providing support to those in need through various service activities.",
+    imageUrl: outreach,
   },
   {
     titleText: "Women's Ministry",

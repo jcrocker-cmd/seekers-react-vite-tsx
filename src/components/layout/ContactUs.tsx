@@ -5,8 +5,25 @@ import { useEffect, useState } from "react";
 import ScrollReveal from "scrollreveal";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+
+interface FormInputs {
+  name: string;
+  email: string;
+  content: string;
+}
 
 function ContactUS() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Initialize React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<FormInputs>();
+
   useEffect(() => {
     const scrollRevealConfig = {
       delay: 400,
@@ -23,71 +40,26 @@ function ContactUS() {
     });
   }, []);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    content: "",
-  });
-
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    content: "",
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const validateForm = () => {
-    const newErrors = {
-      name: formData.name ? "" : "Name is required.",
-      email: formData.email
-        ? /^\S+@\S+\.\S+$/.test(formData.email)
-          ? ""
-          : "Please enter a valid email."
-        : "Email is required.",
-      content: formData.content ? "" : "Message is required.",
-    };
-    setErrors(newErrors);
-    return !Object.values(newErrors).some((error) => error !== "");
-  };
-
-  const sendEmail = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      Swal.fire("Error!", "Please fill in all fields correctly.", "error");
-      return;
-    }
-
+  const onSubmit = (data: FormInputs) => {
     setIsSubmitting(true);
 
+    // Send email using EmailJS
     emailjs
       .send(
         "service_cjhj8z4",
         "template_m1snr8a",
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.content,
+          from_name: data.name,
+          from_email: data.email,
+          message: data.content,
         },
         "vLaqhQ8ZPgX8Yhe_4"
       )
-
       .then(
-        (result) => {
-          setFormData({ name: "", email: "", content: "" }); // Reset form
-          console.log(result);
+        () => {
           Swal.fire("Success!", "Email Sent Successfully", "success");
-          setIsSubmitting(false); // Re-enable button after successful submission
+          reset(); // Reset the form
+          setIsSubmitting(false);
         },
         (error) => {
           console.error("FAILED...", error.text);
@@ -96,8 +68,7 @@ function ContactUS() {
             "Failed to send email. Please try again.",
             "error"
           );
-
-          setIsSubmitting(false); // Re-enable button if submission fails
+          setIsSubmitting(false);
         }
       );
   };
@@ -118,7 +89,7 @@ function ContactUS() {
         <main className="relative min-h-screen flex flex-col md:flex-row justify-center items-center max-sm:min-h-[70vh]">
           {/* Form Section */}
           <div className="bg-[#ECEFF3] child-left rounded-lg shadow-lg p-8 w-1/2 absolute top-0 left-10 z-10 max-md:left-0 max-md:w-full">
-            <form onSubmit={sendEmail}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-6">
                 <label
                   htmlFor="name"
@@ -127,18 +98,15 @@ function ContactUS() {
                   Name<span className="text-red-500">*</span>
                 </label>
                 <input
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  type="text"
                   id="name"
                   placeholder="Your name"
                   className={`w-full border ${
                     errors.name ? "border-red-500" : "border-gray-300"
-                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
+                  } rounded-lg p-3 focus:ring focus:ring-green-200 focus:outline-none`}
+                  {...register("name", { required: "Name is required." })}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm">{errors.name}</p>
+                  <p className="text-red-500 text-sm">{errors.name.message}</p>
                 )}
               </div>
               <div className="mb-6">
@@ -149,18 +117,22 @@ function ContactUS() {
                   Email<span className="text-red-500">*</span>
                 </label>
                 <input
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  type="email"
                   id="email"
+                  type="email"
                   placeholder="Your email address"
                   className={`w-full border ${
                     errors.email ? "border-red-500" : "border-gray-300"
-                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
+                  } rounded-lg p-3 focus:ring focus:ring-green-200 focus:outline-none`}
+                  {...register("email", {
+                    required: "Email is required.",
+                    pattern: {
+                      value: /^\S+@\S+\.\S+$/,
+                      message: "Please enter a valid email.",
+                    },
+                  })}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm">{errors.email}</p>
+                  <p className="text-red-500 text-sm">{errors.email.message}</p>
                 )}
               </div>
               <div className="mb-6">
@@ -171,27 +143,25 @@ function ContactUS() {
                   Message<span className="text-red-500">*</span>
                 </label>
                 <textarea
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
                   id="content"
-                  // rows="4"
                   placeholder="Enter your message"
                   className={`w-full border ${
                     errors.content ? "border-red-500" : "border-gray-300"
-                  } rounded-lg p-3 focus:ring focus:ring-red-200 focus:outline-none`}
+                  } rounded-lg p-3 focus:ring focus:ring-green-200 focus:outline-none`}
+                  {...register("content", { required: "Message is required." })}
                 ></textarea>
                 {errors.content && (
-                  <p className="text-red-500 text-sm">{errors.content}</p>
+                  <p className="text-red-500 text-sm">
+                    {errors.content.message}
+                  </p>
                 )}
               </div>
               <button
                 type="submit"
                 className="bg-black text-white py-3 px-6 rounded-lg shadow hover:bg-gray-800 focus:ring focus:ring-black focus:outline-none"
-                disabled={isSubmitting} // Disable button when submitting
+                disabled={isSubmitting}
               >
-                {isSubmitting ? "Submitting..." : "Submit"}{" "}
-                {/* Show loading text */}
+                {isSubmitting ? "Submitting..." : "Submit"}
               </button>
             </form>
           </div>
