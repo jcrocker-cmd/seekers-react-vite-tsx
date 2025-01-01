@@ -4,8 +4,9 @@ import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../state/loading/loadingSlice";
-import { RootState } from "../state/store";
+import { RootState, AppDispatch } from "../state/store";
 import Swal from "sweetalert2";
+import ViewModal from "../modal/ViewModal";
 
 // Define the type for customer data
 interface Customer {
@@ -18,12 +19,15 @@ interface Customer {
 
 function View() {
   const [customers, setCustomers] = useState<Customer[]>([]); // State with type
-  const dispatch = useDispatch();
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(
+    null
+  );
+  const dispatch = useDispatch<AppDispatch>();
   const loading = useSelector((state: RootState) => state.loading.loading);
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch(setLoading(true)); // Set loading to true before fetching data
+      dispatch(setLoading(true));
       try {
         const response = await axios.get<{ customer: Customer[] }>(
           "http://localhost:8000/api/customers"
@@ -78,6 +82,19 @@ function View() {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (customer: Customer) => {
+    setSelectedCustomer(customer); // Set the selected customer
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setSelectedCustomer(null); // Clear selected customer
+    setIsModalOpen(false);
+    document.body.style.overflow = "auto";
+  };
+
   // Handle loading state
   if (loading) {
     return <div className="text-center mt-10">Loading...</div>;
@@ -85,8 +102,16 @@ function View() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-6xl bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">View Table</h2>
+      <div className="w-full max-w-7xl bg-white shadow-md rounded-lg p-6">
+        <div className="flex justify-between">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">View Table</h2>
+          <Link to="/create">
+            <button className="px-4 py-2 bg-green-500 text-white rounded-md">
+              Create
+            </button>
+          </Link>
+        </div>
+
         <table className="w-full border-collapse border border-gray-200">
           <thead>
             <tr className="bg-gray-200">
@@ -149,12 +174,19 @@ function View() {
                     Delete
                   </button>
 
-                  {/* <button
-                    onClick={() => deleteALert()}
-                    className="px-4 py-2 bg-red-500 text-white rounded-md"
+                  <button
+                    onClick={() => openModal(customer)}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-md"
                   >
-                    Swal
-                  </button> */}
+                    Modal
+                  </button>
+                  {selectedCustomer && (
+                    <ViewModal
+                      isOpen={isModalOpen}
+                      onClose={closeModal}
+                      customer={selectedCustomer}
+                    />
+                  )}
                 </td>
               </tr>
             ))}

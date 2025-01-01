@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "../state/form/formSlice";
 import { setLoading } from "../state/loading/loadingSlice";
-import { RootState } from "../state/store";
+import { setIsSubmitting } from "../state/submission/submissionSlice";
 import Swal from "sweetalert2";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch } from "../state/store";
 
 function Edit() {
   const { id } = useParams<{ id: string }>(); // Get customer ID from the URL
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const formData = useSelector((state: RootState) => state.form);
   const loading = useSelector((state: RootState) => state.loading.loading);
+  const isSubmitting = useSelector(
+    (state: RootState) => state.submission.isSubmitting
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +54,13 @@ function Edit() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.phone) {
+      Swal.fire("Error!", "Please fill in all required fields.", "error");
+      return;
+    }
+
+    dispatch(setIsSubmitting(true));
     try {
       const response = await axios.put(
         `http://localhost:8000/api/customers/${id}/update`,
@@ -58,9 +70,11 @@ function Edit() {
       console.log(response.data);
       Swal.fire("Updated!", response.data.mes, "success");
       navigate("/index");
+      dispatch(setIsSubmitting(false));
     } catch (error) {
       console.error("Error updating customer:", error);
       alert("Failed to update customer.");
+      dispatch(setIsSubmitting(false));
     }
   };
 
@@ -142,7 +156,7 @@ function Edit() {
           type="submit"
           className="w-full px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-sm"
         >
-          Save Changes
+          {isSubmitting ? "Saving..." : "Save Changes"}
         </button>
       </form>
     </div>

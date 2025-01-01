@@ -2,10 +2,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FormState {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  content?: string;
 }
 
 const initialState: FormState = {
@@ -13,6 +14,7 @@ const initialState: FormState = {
   email: "",
   phone: "",
   message: "",
+  content: "",
 };
 
 const formSlice = createSlice({
@@ -24,12 +26,14 @@ const formSlice = createSlice({
       state.email = action.payload.email;
       state.phone = action.payload.phone;
       state.message = action.payload.message;
+      state.content = action.payload.content;
     },
     resetFormData: (state) => {
       state.name = "";
       state.email = "";
       state.phone = "";
       state.message = "";
+      state.content = "";
     },
   },
 });

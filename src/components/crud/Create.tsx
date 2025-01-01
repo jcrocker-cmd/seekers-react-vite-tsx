@@ -1,12 +1,16 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData, resetFormData } from "../state/form/formSlice";
-import { RootState } from "../state/store";
+import { RootState, AppDispatch } from "../state/store";
+import { setIsSubmitting } from "../state/submission/submissionSlice";
 import View from "./Index";
 
 function Create() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const formData = useSelector((state: RootState) => state.form); // Accessing form data from Redux
+  const isSubmitting = useSelector(
+    (state: RootState) => state.submission.isSubmitting
+  );
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -16,17 +20,19 @@ function Create() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    dispatch(setIsSubmitting(true));
     axios
       .post("http://localhost:8000/api/create-customer", formData)
       .then((response) => {
         console.log("Data saved:", response.data);
         alert("Data submitted successfully!");
         dispatch(resetFormData()); // Reset form data after submission
+        dispatch(setIsSubmitting(false));
       })
       .catch((error) => {
         console.error("Error saving data:", error);
         alert("Failed to submit data.");
+        dispatch(setIsSubmitting(false));
       });
   };
 
@@ -104,8 +110,9 @@ function Create() {
           <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-sm"
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>
