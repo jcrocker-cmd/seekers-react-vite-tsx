@@ -45,6 +45,13 @@ const CounterComponent = () => {
         >
           Increment
         </button>
+
+        <button
+          onClick={() => dispatch(incrementAsync(16))}
+          className="bg-black text-white"
+        >
+          Increment
+        </button>
       </div>
     </div>
   );
